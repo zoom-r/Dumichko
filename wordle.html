@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html data-bs-theme="auto" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Думичко</title>
+    <script>
+        (function() {
+
+            // JavaScript snippet handling Dark/Light mode switching
+
+            const getStoredTheme = () => localStorage.getItem('theme');
+            const setStoredTheme = theme => localStorage.setItem('theme', theme);
+            const forcedTheme = document.documentElement.getAttribute('data-bss-forced-theme');
+
+            const getPreferredTheme = () => {
+
+                if (forcedTheme) return forcedTheme;
+
+                const storedTheme = getStoredTheme();
+                if (storedTheme) {
+                    return storedTheme;
+                }
+
+                const pageTheme = document.documentElement.getAttribute('data-bs-theme');
+
+                if (pageTheme) {
+                    return pageTheme;
+                }
+
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+
+            const setTheme = theme => {
+                if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-bs-theme', 'dark');
+                } else {
+                    document.documentElement.setAttribute('data-bs-theme', theme);
+                }
+            }
+
+            setTheme(getPreferredTheme());
+
+            const showActiveTheme = (theme, focus = false) => {
+                const themeSwitchers = [].slice.call(document.querySelectorAll('.theme-switcher'));
+
+                if (!themeSwitchers.length) return;
+
+                document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+                    element.classList.remove('active');
+                    element.setAttribute('aria-pressed', 'false');
+                });
+
+                for (const themeSwitcher of themeSwitchers) {
+
+                    const btnToActivate = themeSwitcher.querySelector('[data-bs-theme-value="' + theme + '"]');
+
+                    if (btnToActivate) {
+                        btnToActivate.classList.add('active');
+                        btnToActivate.setAttribute('aria-pressed', 'true');
+                    }
+                }
+            }
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                const storedTheme = getStoredTheme();
+                if (storedTheme !== 'light' && storedTheme !== 'dark') {
+                    setTheme(getPreferredTheme());
+                }
+            });
+
+            window.addEventListener('DOMContentLoaded', () => {
+                showActiveTheme(getPreferredTheme());
+
+                document.querySelectorAll('[data-bs-theme-value]')
+                    .forEach(toggle => {
+                        toggle.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            const theme = toggle.getAttribute('data-bs-theme-value');
+                            setStoredTheme(theme);
+                            setTheme(theme);
+                            showActiveTheme(theme);
+                        })
+                    })
+            });
+        })();
+    </script>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/Yearbook%20Solid%20cyr.css">
+    <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/wordle.css">
+</head>
+
+<body><link rel="stylesheet" href="assets/css/style.css">
+    <div><link href="../styles/wordle.css" rel="stylesheet">
+        <div class="wordle-container">
+            <header id="header" data-role="Header" class="wordle-header">
+                <h1 id="title" class="wordle-text" style="font-family: 'Yearbook Solid cyr';">Думичко</h1>
+                <div id="header_icons" class="wordle-icon-group"><svg viewBox="0 0 1024 1024" class="wordle-icon">
+              <path d="M512 256q70 0 120 50t50 120q0 54-64 111t-64 103h-84q0-46 20-79t44-48 44-37 20-50q0-34-26-59t-60-25-60 25-26 59h-84q0-70 50-120t120-50zM512 854q140 0 241-101t101-241-101-241-241-101-241 101-101 241 101 241 241 101zM512 86q176 0 301 125t125 301-125 301-301 125-301-125-125-301 125-301 301-125zM470 768v-86h84v86h-84z"></path></svg><svg viewBox="0 0 1024 1024" class="wordle-icon2">
+              <path d="M288 384h-192c-17.6 0-32 14.4-32 32v576c0 17.6 14.4 32 32 32h192c17.6 0 32-14.4 32-32v-576c0-17.6-14.4-32-32-32zM288 960h-192v-256h192v256zM608 256h-192c-17.6 0-32 14.4-32 32v704c0 17.6 14.4 32 32 32h192c17.6 0 32-14.4 32-32v-704c0-17.6-14.4-32-32-32zM608 960h-192v-320h192v320zM928 128h-192c-17.6 0-32 14.4-32 32v832c0 17.6 14.4 32 32 32h192c17.6 0 32-14.4 32-32v-832c0-17.6-14.4-32-32-32zM928 960h-192v-384h192v384z"></path>
+            </svg></div>
+            </header>
+            <div id="word-app-game" class="App-module_game__yruqo">
+                <div id="board-module-container" class="Board-module_boardContainer">
+                    <div id="board-module" class="Board-module_board">
+                        <div id="row-1" class="Row-module_row" role="group" aria-label="Row 1">
+                            <div class="wordle-container05">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container07">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container08">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container09">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container10">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                        </div>
+                        <div id="row-2" class="Row-module_row" role="group" aria-label="Row 2">
+                            <div class="wordle-container05">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container07">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container08">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container09">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container10">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                        </div>
+                        <div id="row-3" class="Row-module_row" role="group" aria-label="Row 2">
+                            <div class="wordle-container05">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container07">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container08">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container09">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container10">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                        </div>
+                        <div id="row-4" class="Row-module_row" role="group" aria-label="Row 2">
+                            <div class="wordle-container05">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container07">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container08">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container09">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container10">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                        </div>
+                        <div id="row-5" class="Row-module_row" role="group" aria-label="Row 2">
+                            <div class="wordle-container05">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container07">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container08">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container09">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container10">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                        </div>
+                        <div id="row-6" class="Row-module_row" role="group" aria-label="Row 2">
+                            <div class="wordle-container05">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container07">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container08">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container09">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                            <div class="wordle-container10">
+                                <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="keyboard-module" class="Keyboard-module_keyboard__uYuqf" role="group" aria-label="Keyboard">
+                    <div id="key-row-1" class="Keyboard-module_row__ilOKU"><button class="btn Key-module_key__kchQI" type="button" data-key="я" aria-disabled="false">Я</button><button class="btn Key-module_key__kchQI" type="button" data-key="е" aria-disabled="false">В</button><button class="btn Key-module_key__kchQI" type="button" data-key="в" aria-disabled="false">Е</button><button class="btn Key-module_key__kchQI" type="button" data-key="р" aria-disabled="false">Р</button><button class="btn Key-module_key__kchQI" type="button" data-key="т" aria-disabled="false">Т</button><button class="btn Key-module_key__kchQI" type="button" data-key="ъ" aria-disabled="false">ъ</button><button class="btn Key-module_key__kchQI" type="button" data-key="у" aria-disabled="false">у</button><button class="btn Key-module_key__kchQI" type="button" data-key="и" aria-disabled="false">и</button><button class="btn Key-module_key__kchQI" type="button" data-key="о" aria-disabled="false">о</button><button class="btn Key-module_key__kchQI" type="button" data-key="п" aria-disabled="false">п</button><button class="btn Key-module_key__kchQI" type="button" data-key="ю" aria-disabled="false">ю</button></div>
+                    <div id="key-row-2" class="Keyboard-module_row__ilOKU"><button class="btn Key-module_key__kchQI" type="button" data-key="а" aria-disabled="false">а</button><button class="btn Key-module_key__kchQI" type="button" data-key="с" aria-disabled="false">с</button><button class="btn Key-module_key__kchQI" type="button" data-key="д" aria-disabled="false">д</button><button class="btn Key-module_key__kchQI" type="button" data-key="ф" aria-disabled="false">ф</button><button class="btn Key-module_key__kchQI" type="button" data-key="г" aria-disabled="false">г</button><button class="btn Key-module_key__kchQI" type="button" data-key="х" aria-disabled="false">х</button><button class="btn Key-module_key__kchQI" type="button" data-key="й" aria-disabled="false">й</button><button class="btn Key-module_key__kchQI" type="button" data-key="к" aria-disabled="false">к</button><button class="btn Key-module_key__kchQI" type="button" data-key="л" aria-disabled="false">л</button><button class="btn Key-module_key__kchQI" type="button" data-key="я" aria-disabled="false">ш</button><button class="btn Key-module_key__kchQI" type="button" data-key="я" aria-disabled="false">щ</button></div>
+                    <div id="key-row-3" class="Keyboard-module_row__ilOKU"><button class="btn Key-module_key__kchQI" type="button" data-key="↲" aria-disabled="false" style="font-size: 15px;">въведи</button><button class="btn Key-module_key__kchQI" type="button" data-key="з" aria-disabled="false">з</button><button class="btn Key-module_key__kchQI" type="button" data-key="ь" aria-disabled="false">ь</button><button class="btn Key-module_key__kchQI" type="button" data-key="ц" aria-disabled="false">ц</button><button class="btn Key-module_key__kchQI" type="button" data-key="ж" aria-disabled="false">ж</button><button class="btn Key-module_key__kchQI" type="button" data-key="б" aria-disabled="false">б</button><button class="btn Key-module_key__kchQI" type="button" data-key="н" aria-disabled="false">н</button><button class="btn Key-module_key__kchQI" type="button" data-key="м" aria-disabled="false">м</button><button class="btn Key-module_key__kchQI" type="button" data-key="ч" aria-disabled="false">ч</button><button class="btn Key-module_key__kchQI" type="button" data-key="я" aria-disabled="false">⌫ </button></div>
+                </div>
+            </div>
+        </div>
+    </div><script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAjjQ9Lgk-Azxw5Skbp4epHa6P7uEtd4uI",
+        authDomain: "dumichko.firebaseapp.com",
+        projectId: "dumichko",
+        storageBucket: "dumichko.appspot.com",
+        messagingSenderId: "569107656565",
+        appId: "1:569107656565:web:0ff85cf5fe1744198e2d3c"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+</script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/words.js"></script>
+</body>
+
+</html>
