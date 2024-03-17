@@ -1,12 +1,16 @@
-const fs = require('fs');
-const csv = require('csv-parser');
-
-const all_words = [];
-
-fs.createReadStream('/path/to/w_words.csv')
-    .pipe(csv())
-    .on('data', (row) => {
-        all_words.push(row[1]);
-    }
-);
-const words = all_words.filter((word) => word.length == 5);
+// Purpose: to fetch the words from the csv file and filter the words with 5 letters
+function fetchWords() {
+    const fiveLetterWords = [];
+    fetch('./assets/files/w_words.csv')
+        .then(response => response.text())
+        .then(data => {
+            const results = Papa.parse(data, { delimiter: ";", header: false });
+            results.data.forEach(row => {
+                const word = row[1]; // Access the second column by its index
+                if (word && word.length == 5) {
+                    fiveLetterWords.push(word);
+                }
+            });
+        });
+    return fiveLetterWords;
+}
