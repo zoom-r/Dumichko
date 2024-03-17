@@ -1,0 +1,91 @@
+.wordle-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+.wordle-header {
+  width: 100%;
+  height: 65px;
+  display: flex;
+  max-width: var(--dl-size-size-maxwidth);
+  align-items: center;
+  padding-top: var(--dl-space-space-twounits);
+  padding-left: var(--dl-space-space-threeunits);
+  padding-right: var(--dl-space-space-threeunits);
+  padding-bottom: var(--dl-space-space-twounits);
+  justify-content: space-between;
+}
+.wordle-icon-group {
+  display: flex;
+}
+.wordle-icon {
+  width: 24px;
+  height: 24px;
+}
+.wordle-icon2 {
+  width: 24px;
+  height: 24px;
+}
+.wordle-container05 {
+  animation-delay: 0ms;
+}
+.wordle-container07 {
+  animation-delay: 100ms;
+}
+.wordle-container08 {
+  animation-delay: 200ms;
+}
+.wordle-container09 {
+  animation-delay: 300ms;
+}
+.wordle-container10 {
+  animation-delay: 400ms;
+}
+.wordle-container11 {
+  flex: 0 0 auto;
+  width: 100%;
+  border: 2px dashed rgba(120, 120, 120, 0.4);
+  height: 100px;
+  display: flex;
+  align-items: flex-start;
+}
+@media(max-width: 767px) {
+  .wordle-header {
+    padding-left: var(--dl-space-space-twounits);
+    padding-right: var(--dl-space-space-twounits);
+  }
+}
+@media(max-width: 479px) {
+  .wordle-container {
+    background-color: #000000;
+  }
+  .wordle-header {
+    width: 479px;
+    padding: var(--dl-space-space-unit);
+    position: relative;
+    align-self: center;
+  }
+  .wordle-text {
+    color: var(--dl-color-gray-white);
+    font-size: 45px;
+    text-align: center;
+    font-family: YearbookSolidcyr-Bold;
+    text-transform: uppercase;
+  }
+  .wordle-icon-group {
+    position: relative;
+  }
+  .wordle-icon {
+    fill: #D9D9D9;
+    width: 47px;
+    height: 42px;
+  }
+  .wordle-icon2 {
+    fill: #D9D9D9;
+    width: 43px;
+    height: 37px;
+  }
+}
