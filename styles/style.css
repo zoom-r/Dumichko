@@ -120,6 +120,7 @@
   grid-template-columns: repeat(5, 1fr);
 }
 .Tile-module_tile {
+  font-family: "YearbookSolidcyr-Bold";
   color: #f8f8f8;
   width: 100%;
   display: inline-flex;
@@ -133,6 +134,26 @@
   text-transform: uppercase;
   vertical-align: middle;
   justify-content: center;
+}
+.Tile-module_tile[data-state="correct"] {
+  background-color: #538d4e;
+  color: #f8f8f8;
+}
+.Tile-module_tile[data-state="present"] {
+  background-color: #b59f3b;
+  color: #f8f8f8;
+}
+.Tile-module_tile[data-state="absent"] {
+  background-color: #3a3a3c;
+  color: #fff;
+}
+.Tile-module_tile[data-state="empty"] {
+  border: 2px solid #3a3a3c;
+}
+.Tile-module_tile::before{
+  content: "";
+  display: inline-block;
+  padding-bottom: 100%;
 }
 .Heading {
   font-size: 32px;
