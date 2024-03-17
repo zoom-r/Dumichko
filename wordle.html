@@ -100,7 +100,7 @@
                   <div
                     role="img"
                     aria-live="polite"
-                    data-state=""
+                    data-state="empty"
                     data-testid="tile"
                     data-animation="idle"
                     aria-roledescription="tile"
@@ -122,5 +122,24 @@
       defer=""
       src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
     ></script>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAjjQ9Lgk-Azxw5Skbp4epHa6P7uEtd4uI",
+        authDomain: "dumichko.firebaseapp.com",
+        projectId: "dumichko",
+        storageBucket: "dumichko.appspot.com",
+        messagingSenderId: "569107656565",
+        appId: "1:569107656565:web:0ff85cf5fe1744198e2d3c"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+    </script>
   </body>
 </html>
