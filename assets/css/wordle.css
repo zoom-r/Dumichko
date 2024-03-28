@@ -45,7 +45,11 @@
 
 .Keyboard-module_keyboard__uYuqf {
   height: 200px;
-  margin: 0 8px;
+  margin-top: 20%;
+  margin-bottom: 10%;
+  margin-left: 8px;
+  margin-right: 8px;
+  
   /*-webkit-user-select: none;*/
   /*-moz-user-select: none;*/
   user-select: none;
@@ -66,27 +70,40 @@
   display: flex;
   max-width: var(--dl-size-size-maxwidth);
   align-items: center;
-  padding-top: var(--dl-space-space-twounits);
+  padding: var(--dl-space-space-unit);
+  font-size: 45px;
+  align-self: center;
+  position: relative;
+  /* padding-top: var(--dl-space-space-twounits);
   padding-left: var(--dl-space-space-threeunits);
   padding-right: var(--dl-space-space-threeunits);
-  padding-bottom: var(--dl-space-space-twounits);
+  padding-bottom: var(--dl-space-space-twounits); */
   justify-content: space-between;
 }
 
 .wordle-icon-group {
   display: flex;
+  position: relative;
+}
+
+.wordle-text {
+  color: var(--dl-color-gray-white);
+  font-size: 45px;
+  text-align: center;
+  font-family: "YearbookSolidcyr-Bold";
+  text-transform: uppercase;
 }
 
 .wordle-icon {
-  width: 24px;
-  height: 24px;
-  color: white;
+  fill: #D9D9D9;
+  width: 47px;
+  height: 42px;
 }
 
 .wordle-icon2 {
-  width: 24px;
-  height: 24px;
-  color: white;
+  fill: #D9D9D9;
+  width: 43px;
+  height: 37px;
 }
 
 .wordle-container05 {
@@ -118,16 +135,12 @@
   align-items: flex-start;
 }
 
-@media (max-width: 767px) {
+/* @media (max-width: 767px) {
   .wordle-header {
-    padding-left: var(--dl-space-space-twounits);
-    padding-right: var(--dl-space-space-twounits);
-  }
-}
-
-@media (max-width: 520px) {
-  .wordle-container {
-    background-color: #000000;
+    width: 479px;
+    padding: var(--dl-space-space-unit);
+    position: relative;
+    align-self: center;
   }
 }
 
@@ -138,37 +151,6 @@
     position: relative;
     align-self: center;
   }
-}
+} */
 
-@media (max-width: 520px) {
-  .wordle-text {
-    color: var(--dl-color-gray-white);
-    font-size: 45px;
-    text-align: center;
-    font-family: "YearbookSolidcyr-Bold";
-    text-transform: uppercase;
-  }
-}
-
-@media (max-width: 520px) {
-  .wordle-icon-group {
-    position: relative;
-  }
-}
-
-@media (max-width: 520px) {
-  .wordle-icon {
-    fill: #D9D9D9;
-    width: 47px;
-    height: 42px;
-  }
-}
-
-@media (max-width: 520px) {
-  .wordle-icon2 {
-    fill: #D9D9D9;
-    width: 43px;
-    height: 37px;
-  }
-}
 
