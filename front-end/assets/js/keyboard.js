@@ -1,13 +1,10 @@
 const elements = document.getElementsByClassName("Key-module_key__kchQI");
 let buttons = { };
 for(let i=0;i<=31;i++){
-    if(i==22||i==31){
-        continue;
-    }
     buttons[elements.item(i).getAttribute('data-key')] = elements.item(i);
 }
 
-const alphabet = {
+const keys = {
     "a": "\u0430",
     "b": "\u0431",
     "v": "\u0432",
@@ -37,9 +34,57 @@ const alphabet = {
     "y": "\u044A",
     "x": "\u044C",
     "ju": "\u044E",
-    "q": "\u044F"
+    "q": "\u044F",
+    "enter": "↲",
+    "backspace": "⌫"
 };
 
-function printBukva(element){
-    console.log(element.getAttribute('data-key'));
+function printLetter(element){
+    const row = getCurrentRow();
+    const tiles = row.getElementsByClassName('Tile-module_tile');
+    let tile;
+    for(let i = 4; i >= 0; i--){
+        if(tiles.item(i).innerHTML){
+            continue;
+        }
+        tile = tiles.item(i);
+    }
+    tile.innerHTML = element.getAttribute('data-key');
+}
+
+function getCurrentRow(){
+    const rows = document.getElementsByClassName("Row-module_row");
+    let row;
+    for(let i = 5; i >= 0; i--){
+        if(rows.item(i).getAttribute('data-state') == 'entered'){
+            continue;
+        }
+        row = rows.item(i);
+    }
+    return row;
+}
+
+function clickEnterKey(element){
+    const row = getCurrentRow();
+    const tiles = row.getElementsByClassName('Tile-module_tile');
+    const word = "";
+    for(let i = 4; i >= 0; i--){
+        if(tiles.item(i).innerHTML){
+            document.getElementById("error_label").innerHTML = "Непълна дума!";
+            break;
+        }
+        word += tiles.item(i).getAttribute("data-key").toUpperCase();
+    }
+    if(words.includes(word)){
+        checkEnteredLetters(Array.from(tiles));
+        row.getAttribute("data-state") = "entered";
+    }
+}
+
+function clickBackspaceKey(element){
+
+}
+
+function checkEnteredLetters(letters){
+
 }

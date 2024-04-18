@@ -86,7 +86,7 @@
             });
         })();
     </script>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap">
@@ -94,11 +94,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;display=swap">
-    <link rel="stylesheet" href="assets/css/Yearbook%20Solid%20cyr.css">
+    <link rel="stylesheet" href="../assets/css/Yearbook%20Solid%20cyr.css">
     <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.css">
     <link rel="stylesheet" href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/wordle.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/wordle.css">
 </head>
 
 <body>
@@ -112,9 +112,10 @@
             </svg></div>
             </header>
             <div id="word-app-game" class="App-module_game__yruqo">
+                <label id="error_label"></label>
                 <div id="board-module-container" class="Board-module_boardContainer">
                     <div id="board-module" class="Board-module_board">
-                        <div id="row-1" class="Row-module_row" role="group" aria-label="Row 1">
+                        <div id="row-1" class="Row-module_row" role="group" aria-label="Row 1" data-state="not_entered">
                             <div class="wordle-container05">
                                 <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
                             </div>
@@ -131,7 +132,7 @@
                                 <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
                             </div>
                         </div>
-                        <div id="row-2" class="Row-module_row" role="group" aria-label="Row 2">
+                        <div id="row-2" class="Row-module_row" role="group" aria-label="Row 2" data-state="not_entered">
                             <div class="wordle-container05">
                                 <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
                             </div>
@@ -148,7 +149,7 @@
                                 <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
                             </div>
                         </div>
-                        <div id="row-3" class="Row-module_row" role="group" aria-label="Row 2">
+                        <div id="row-3" class="Row-module_row" role="group" aria-label="Row 3" data-state="not_entered">
                             <div class="wordle-container05">
                                 <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
                             </div>
@@ -165,7 +166,7 @@
                                 <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
                             </div>
                         </div>
-                        <div id="row-4" class="Row-module_row" role="group" aria-label="Row 2">
+                        <div id="row-4" class="Row-module_row" role="group" aria-label="Row 4" data-state="not_entered">
                             <div class="wordle-container05">
                                 <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
                             </div>
@@ -182,7 +183,7 @@
                                 <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
                             </div>
                         </div>
-                        <div id="row-5" class="Row-module_row" role="group" aria-label="Row 2">
+                        <div id="row-5" class="Row-module_row" role="group" aria-label="Row 5" data-state="not_entered">
                             <div class="wordle-container05">
                                 <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
                             </div>
@@ -199,7 +200,7 @@
                                 <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
                             </div>
                         </div>
-                        <div id="row-6" class="Row-module_row" role="group" aria-label="Row 2">
+                        <div id="row-6" class="Row-module_row" role="group" aria-label="Row 6" data-state="not_entered">
                             <div class="wordle-container05">
                                 <div role="img" aria-live="polite" data-state="empty" data-testid="tile" data-animation="idle" aria-roledescription="tile" class="Tile-module_tile"></div>
                             </div>
@@ -219,17 +220,52 @@
                     </div>
                 </div>
                 <div id="keyboard-module" class="Keyboard-module_keyboard__uYuqf" role="group" aria-label="Keyboard">
-                    <div id="key-row-1" class="Keyboard-module_row__ilOKU"><button class="btn Key-module_key__kchQI" type="button" data-key="я" aria-disabled="false", onclick="printBukva(this)">Я</button><button class="btn Key-module_key__kchQI" type="button" data-key="в" aria-disabled="false">В</button><button class="btn Key-module_key__kchQI" type="button" data-key="е" aria-disabled="false">Е</button><button class="btn Key-module_key__kchQI" type="button" data-key="р" aria-disabled="false">Р</button><button class="btn Key-module_key__kchQI" type="button" data-key="т" aria-disabled="false">Т</button><button class="btn Key-module_key__kchQI" type="button" data-key="ъ" aria-disabled="false">ъ</button><button class="btn Key-module_key__kchQI" type="button" data-key="у" aria-disabled="false">у</button><button class="btn Key-module_key__kchQI" type="button" data-key="и" aria-disabled="false">и</button><button class="btn Key-module_key__kchQI" type="button" data-key="о" aria-disabled="false">о</button><button class="btn Key-module_key__kchQI" type="button" data-key="п" aria-disabled="false">п</button><button class="btn Key-module_key__kchQI" type="button" data-key="ю" aria-disabled="false">ю</button></div>
-                    <div id="key-row-2" class="Keyboard-module_row__ilOKU"><button class="btn Key-module_key__kchQI" type="button" data-key="а" aria-disabled="false">а</button><button class="btn Key-module_key__kchQI" type="button" data-key="с" aria-disabled="false">с</button><button class="btn Key-module_key__kchQI" type="button" data-key="д" aria-disabled="false">д</button><button class="btn Key-module_key__kchQI" type="button" data-key="ф" aria-disabled="false">ф</button><button class="btn Key-module_key__kchQI" type="button" data-key="г" aria-disabled="false">г</button><button class="btn Key-module_key__kchQI" type="button" data-key="х" aria-disabled="false">х</button><button class="btn Key-module_key__kchQI" type="button" data-key="й" aria-disabled="false">й</button><button class="btn Key-module_key__kchQI" type="button" data-key="к" aria-disabled="false">к</button><button class="btn Key-module_key__kchQI" type="button" data-key="л" aria-disabled="false">л</button><button class="btn Key-module_key__kchQI" type="button" data-key="ш" aria-disabled="false">ш</button><button class="btn Key-module_key__kchQI" type="button" data-key="щ" aria-disabled="false">щ</button></div>
-                    <div id="key-row-3" class="Keyboard-module_row__ilOKU"><button class="btn Key-module_key__kchQI" type="button" data-key="↲" aria-disabled="false" style="font-size: 15px;">въведи</button><button class="btn Key-module_key__kchQI" type="button" data-key="з" aria-disabled="false">з</button><button class="btn Key-module_key__kchQI" type="button" data-key="ь" aria-disabled="false">ь</button><button class="btn Key-module_key__kchQI" type="button" data-key="ц" aria-disabled="false">ц</button><button class="btn Key-module_key__kchQI" type="button" data-key="ж" aria-disabled="false">ж</button><button class="btn Key-module_key__kchQI" type="button" data-key="б" aria-disabled="false">б</button><button class="btn Key-module_key__kchQI" type="button" data-key="н" aria-disabled="false">н</button><button class="btn Key-module_key__kchQI" type="button" data-key="м" aria-disabled="false">м</button><button class="btn Key-module_key__kchQI" type="button" data-key="ч" aria-disabled="false">ч</button><button class="btn Key-module_key__kchQI" type="button" data-key="⌫" aria-disabled="false">⌫</button></div>
+                    <div id="key-row-1" class="Keyboard-module_row__ilOKU">
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="я" aria-disabled="false" onclick="printLetter(this)">Я</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="в" aria-disabled="false" onclick="printLetter(this)">В</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="е" aria-disabled="false" onclick="printLetter(this)">Е</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="р" aria-disabled="false" onclick="printLetter(this)">Р</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="т" aria-disabled="false" onclick="printLetter(this)">Т</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="ъ" aria-disabled="false" onclick="printLetter(this)">ъ</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="у" aria-disabled="false" onclick="printLetter(this)">у</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="и" aria-disabled="false" onclick="printLetter(this)">и</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="о" aria-disabled="false" onclick="printLetter(this)">о</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="п" aria-disabled="false" onclick="printLetter(this)">п</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="ю" aria-disabled="false" onclick="printLetter(this)">ю</button>
+                    </div>
+                    <div id="key-row-2" class="Keyboard-module_row__ilOKU">
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="а" aria-disabled="false" onclick="printLetter(this)">а</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="с" aria-disabled="false" onclick="printLetter(this)">с</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="д" aria-disabled="false" onclick="printLetter(this)">д</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="ф" aria-disabled="false" onclick="printLetter(this)">ф</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="г" aria-disabled="false" onclick="printLetter(this)">г</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="х" aria-disabled="false" onclick="printLetter(this)">х</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="й" aria-disabled="false" onclick="printLetter(this)">й</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="к" aria-disabled="false" onclick="printLetter(this)">к</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="л" aria-disabled="false" onclick="printLetter(this)">л</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="ш" aria-disabled="false" onclick="printLetter(this)">ш</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="щ" aria-disabled="false" onclick="printLetter(this)">щ</button>
+                    </div>
+                    <div id="key-row-3" class="Keyboard-module_row__ilOKU">
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="↲" aria-disabled="false" onclick="clickEnterKey(this)" style="font-size: 15px;">въведи</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="з" aria-disabled="false" onclick="printLetter(this)">з</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="ь" aria-disabled="false" onclick="printLetter(this)">ь</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="ц" aria-disabled="false" onclick="printLetter(this)">ц</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="ж" aria-disabled="false" onclick="printLetter(this)">ж</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="б" aria-disabled="false" onclick="printLetter(this)">б</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="н" aria-disabled="false" onclick="printLetter(this)">н</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="м" aria-disabled="false" onclick="printLetter(this)">м</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="ч" aria-disabled="false" onclick="printLetter(this)">ч</button>
+                        <button class="btn Key-module_key__kchQI" type="button" data-key="⌫" aria-disabled="false" onclick="clickBackspaceKey(this)">⌫</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/keyboard.js"></script>
-    <script src="assets/js/words.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/js/words.js"></script>
+    <script src="../assets/js/keyboard.js"></script>
 </body>
 
 </html>
