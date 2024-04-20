@@ -1,2 +1,4 @@
 .bsdesign
 **/node_modules
+.hintrc
+ca.pem

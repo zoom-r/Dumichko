@@ -40,8 +40,7 @@ const keys = {
 };
 
 function printLetter(element){
-    const row = getCurrentRow();
-    const tiles = row.getElementsByClassName('Tile-module_tile');
+    const tiles = getCurrentRow().getElementsByClassName('Tile-module_tile');
     let tile;
     for(let i = 4; i >= 0; i--){
         if(tiles.item(i).innerHTML){
@@ -65,26 +64,52 @@ function getCurrentRow(){
 }
 
 function clickEnterKey(element){
-    const row = getCurrentRow();
-    const tiles = row.getElementsByClassName('Tile-module_tile');
-    const word = "";
+    const tiles = getCurrentRow().getElementsByClassName('Tile-module_tile');
+    let word = "";
     for(let i = 4; i >= 0; i--){
-        if(tiles.item(i).innerHTML){
-            document.getElementById("error_label").innerHTML = "Непълна дума!";
+        if(!tiles.item(i).innerHTML){
+            toggleErrorLabel("Непълна дума!");
             break;
+        }else{
+            word += tiles.item(i).innerHTML.toUpperCase();
         }
-        word += tiles.item(i).getAttribute("data-key").toUpperCase();
     }
+    word = word.split("").reverse().join("");
     if(words.includes(word)){
-        checkEnteredLetters(Array.from(tiles));
+        checkEnteredLetters(tiles);
         row.getAttribute("data-state") = "entered";
+        //TODO: Save row in the database
+    }else{
+        toggleErrorLabel("Невалидна дума!");
     }
+}
+
+function toggleErrorLabel(error){
+    document.getElementById("error_label").innerHTML = error;
+    document.getElementById("error_label").dataset.state = "show";
+    setTimeout(() => {
+        document.getElementById("error_label").dataset.state = "hide";
+    }, 3000);
 }
 
 function clickBackspaceKey(element){
-
+    const tiles = getCurrentRow().getElementsByClassName('Tile-module_tile');
+    for(let i = 0; i < 5; i++){
+        if(tiles.item(i).innerHTML){
+            if(i == 4){
+                tiles.item(i).innerHTML = "";
+                break;
+            }else{
+                continue;
+            }
+        }
+        tiles.item(i-1).innerHTML = "";
+        break;
+    }
 }
 
 function checkEnteredLetters(letters){
-
+    for(let i = 0; i < 5; i++){
+        letters.item(i)
+    }
 }

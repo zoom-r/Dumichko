@@ -127,6 +127,7 @@
   font-family: inherit;
   font-weight: bold;
   line-height: 1;
+  -webkit-user-select: none;
   user-select: none;
   text-transform: uppercase;
   vertical-align: middle;
