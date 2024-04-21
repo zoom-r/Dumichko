@@ -95,22 +95,34 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;display=swap">
     <link rel="stylesheet" href="assets/css/Yearbook%20Solid%20cyr.css">
+    <link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="../css/home.css">
 </head>
 
 <body>
-    <div id="home-div">
-        <div id="text-div">
-            <h1 id="heading-icon">Думичко</h1>
-            <h2 id="subheading">Имате 6 шанса да познаете 5 буквена дума</h2>
-        </div>
-        <div id="button-group">
-            <a href="/login"><button class="btn btn-primary home-buttons" id="login-btn" type="button">Влезте в акаунта си</button></a>
-            <a href="/game"><button class="btn btn-primary home-buttons" id="play-btn" type="button">Играй</button></a>
-        </div>
-        <div id="details-div">
-            <p id="date" style="font-weight: 700;margin-bottom: 3px;"></p>
-            <p id="word-number">№&nbsp;</p>
+    <div class="container py-5">
+        <div class="shadow p-5 rounded mb-5">
+            <ul class="nav nav-tabs text-center flex-column flex-sm-row rounded-nav tab-colours" role="tablist" id="myTab">
+                <li class="nav-item flex-sm-fill tab-border-colour" role="presentation" style="margin-right: 0.5rem;"><a class="nav-link active text-uppercase border-0 font-weight-bold" role="tab" data-bs-toggle="tab" id="login-tab" aria-controls="login" aria-selected="true" data-toggle="tab" href="#login">Вход</a></li>
+                <li class="nav-item flex-sm-fill tab-border-colour" role="presentation" style="margin-left: 0.5rem;"><a class="nav-link text-uppercase border-0 font-weight-bold" role="tab" data-bs-toggle="tab" id="signup-tab" aria-controls="profile" aria-selected="false" data-toggle="tab" href="#signup">Регистрация</a></li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane active fade px-4 pt-5 show" role="tabpanel" id="login" aria-labelledby="login-tab">
+                    <form>
+                        <div data-mdb-input-init="" class="form-outline mb-4"><input class="form-control form-control" type="email" id="loginName"><label class="form-label form-label" for="loginName">Имейл</label></div>
+                        <div data-mdb-input-init="" class="form-outline mb-4"><input class="form-control form-control" type="password" id="loginPassword"><label class="form-label form-label" for="loginPassword">Парола</label></div>
+                        <button class="btn btn-primary btn-block mb-3 home-buttons" type="submit" data-mdb-button-init="" data-mdb-ripple-init="" onclick="LogIn()">Вход</button>
+                    </form>
+                </div>
+                <div class="tab-pane fade px-4 pt-5" role="tabpanel" id="signup" aria-labelledby="signup-tab">
+                    <form>
+                        <div data-mdb-input-init="" class="form-outline mb-4"><input class="form-control form-control" type="email" id="registerEmail"><label class="form-label form-label" for="registerEmail">Имейл</label></div>
+                        <div data-mdb-input-init="" class="form-outline mb-4"><input class="form-control form-control" type="password" id="registerPassword"><label class="form-label form-label" for="registerPassword">Парола</label></div>
+                        <div data-mdb-input-init="" class="form-outline mb-4"><input class="form-control form-control" type="password" id="registerRepeatPassword"><label class="form-label form-label" for="registerRepeatPassword">Повтори парола</label></div>
+                        <button class="btn btn-primary btn-block mb-3 home-buttons" type="submit" data-mdb-button-init="" data-mdb-ripple-init="" onclick="SignUp()">Sign in</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
