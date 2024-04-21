@@ -6,4 +6,8 @@ app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../../front-end/pages/login.html'));
 });
 
+app.get('/check', (req, res) => {
+    
+});
+
 module.exports = app;
