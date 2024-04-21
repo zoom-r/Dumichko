@@ -2,7 +2,7 @@
 
 function fetchWords() {
     const words = [];
-    fetch('../assets/files/words.csv')
+    fetch('../files/words.csv')
         .then(response => response.text())
         .then(data => {
             const results = Papa.parse(data, { header: false });
@@ -14,4 +14,4 @@ function fetchWords() {
     return words;
 }
 
-const words = fetchWords();
+module.exports = fetchWords();
