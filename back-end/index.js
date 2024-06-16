@@ -10,11 +10,13 @@ app.use(express.static(path.resolve(__dirname, '../front-end')));
 const gameRouter = require('./routes/game');
 const homeRouter = require('./routes/home');
 const loginRouter = require('./routes/login');
+const keysRouter = require('./routes/keys');
 
 // Use routes
 app.use('/game', gameRouter);
 app.use('/', homeRouter);
 app.use('/login', loginRouter);
+app.use('/keys', keysRouter);
 
 
 app.all('*', (req, res) => {

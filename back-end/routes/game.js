@@ -66,17 +66,11 @@ loadWords().then(availableWords => {
         console.log('Word of the day:', dailyWord);
     }, 24 * 60 * 60 * 1000); // Run every 24 hours
     // Use getDailyWord() to handle requests that need the daily word
-    const secretKey = process.env.SECRET_KEY;
     app.get('/word', (req, res) => {
         const word = getDailyWord();
-        const encryptedData = encryptData({ word: word, words: availableWords }, secretKey);
+        const encryptedData = encryptData({ word: word, words: availableWords }, process.env.WORDS);
         res.send(encryptedData);
     });
-
-});
-
-app.get('/word/key', (req, res) => {
-    res.send(process.env.SECRET_KEY);
 });
 
 function encryptData(data, secretKey) {
@@ -91,6 +85,7 @@ function encryptData(data, secretKey) {
     };
 }
 
+//TODO
 app.get('/save', (req, res) => {
     const saveRow = require('../controllers/game');
     const rowId = req.body.rowId;

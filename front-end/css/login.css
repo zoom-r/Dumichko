@@ -10,6 +10,22 @@
   }
 }
 
+.form-control {
+  border-radius: 50rem;
+}
+
+.form-control[data-state='invalid']{
+  border-color: red;
+}
+
+.form-control[data-state='valid']{
+  border-color: green;
+}
+
+.form-label{
+  margin-left:1rem;
+}
+
 .with-arrow .nav-link.active {
   position: relative;
 }

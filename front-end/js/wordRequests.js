@@ -1,6 +1,6 @@
 let words;
 let wordOfTheDay;
-axios.get('http://localhost:3000/game/word/key')
+axios.get('http://localhost:3000/keys/words')
     .then(function(response){
         const secretKey = response.data;
         axios.get('http://localhost:3000/game/word')
@@ -35,6 +35,15 @@ function decryptData(encryptedData, secretKey) {
     const decryptedStr = decrypted.toString(CryptoJS.enc.Utf8);
 
     return JSON.parse(decryptedStr); // Assuming the original encrypted data was a JSON string
+}
+
+//TODO: Implement saving the row to the database
+function saveRow(rowId, row){
+    const response = axios.post('/save', {
+        rowId: rowId,
+        row: row,
+        id: userId
+    });
 }
 
 // function checkEnteredLetters(letters){
