@@ -88,3 +88,7 @@
   color: var(--bs-emphasis-color);
 }
 
+.home-buttons:disabled{
+  background-color: #838388;
+  border-color: #838388;
+}

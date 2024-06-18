@@ -1,9 +1,8 @@
-const connection = require('../database/conection.js');
 const express = require('express');
 const path = require('path');
-const bcrypt = require('bcrypt');
 const validator = require('validator');
-const {checkUser, checkEmail, encryptPassword} = require('../database/login.js');
+const {checkUser, checkEmail, encryptPassword, saveUser} = require('../database/login.js');
+const { error } = require('console');
 
 const app = express.Router();
 
@@ -22,8 +21,23 @@ app.post('/check-email', (req, res) => {
     }else{
         res.send(false);
     }
-    
-    
+});
+
+async function syncSaveUser(email, pass){
+    await encryptPassword(pass).then(encryptedPassword => {
+        console.log(encryptedPassword);
+        saveUser(email, encryptedPassword).then(result => {
+            return result;
+        }).catch(error => {
+            console.log(error);
+            return false
+        });
+    });
+}
+
+app.post('/signup', (req, res) => {
+    console.log(req.body.email, req.body.password);
+    res.send(syncSaveUser(req.body.email, req.body.password));
 });
 
 module.exports = app;

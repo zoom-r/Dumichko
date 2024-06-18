@@ -1,4 +1,3 @@
-//const connection = require('./conection.js');
 const mysql = require('mysql2/promise');
 const path = require('path'); 
 const bcrypt = require('bcrypt');
@@ -26,6 +25,7 @@ async function createConnection(){
 
 async function checkUser(email, password){
     try{
+        const connection = await createConnection();
         //check if email exists in the database
         const sql = 'SELECT `password` FROM `users` WHERE `email` = ?';
         const values = [email];
@@ -75,18 +75,59 @@ async function checkEmail(email) {
     }
 }
 
-function encryptPassword(password) {
-    bcrypt.hash(password, 10, function(err, hash) {
+async function encryptPassword(password) {
+    await bcrypt.hash(password, 10, function(err, hash) {
         if(err) {
             console.log(err);
         } else {
+            console.log(hash);
             return hash;
         }
     });
 }
 
+async function createTables(){
+    const connection = await createConnection();
+    const sql = 'INSERT INTO `distribution` (`first`, `second`, `third`, `fourth`, `fifth`, `sixth`) VALUES (0,0,0,0,0,0);';
+    const sql2 = 'INSERT INTO `current_progress` (`first`, `second`, `third`, `fourth`, `fifth`, `sixth`) VALUES (0,0,0,0,0,0);';
+    const sql3 = 'INSERT INTO `stats` (`id_guesses`) VALUE (?)'
+    try {
+        const [result, fields] = await connection.execute(sql);
+        const [result2, fields2] = await connection.execute(sql2);
+        const [result3, fields3] = await connection.execute(sql3, [result.insertId]); // Assuming you meant to pass the first row of the first result as a parameter
+        // Assuming the first column of the first row contains the ID you're interested in
+        console.log(result.insertId, result2.insertId, result3.insertId);
+        return {id_progress: result2.insertId, id_stats: result3.insertId};
+    } catch (err) {
+        console.error(err);
+        throw err; // It's better to throw the error or handle it appropriately
+    }
+
+}
+
+
+async function saveUser(email, password){
+    const connection = await createConnection();
+    const sql = 'INSERT INTO `users` (`email`, `password`, `id_stats`, `id_progress`) VALUES (?, ?, ?, ?)';
+    const ids = await createTables();
+    const values = [email, password, ids.id_stats, ids.id_progress];
+    try {
+        console.log(values);
+        const [result, fields] = await connection.execute(sql, values);
+        // console.log(result);
+        // console.log(fields);
+        return true;
+        return 
+    } catch (err) {
+        console.error(err);
+        return false; // It's better to throw the error or handle it appropriately
+    }
+}
+
+
 module.exports = {
     checkUser,
     checkEmail,
-    encryptPassword
+    encryptPassword,
+    saveUser
   };
