@@ -5,12 +5,13 @@ const app = express();
 const port = 3000;
 
 app.use(express.static(path.resolve(__dirname, '../front-end')));
+app.use(express.json());
 
 // Load routes
 const gameRouter = require('./routes/game');
 const homeRouter = require('./routes/home');
 const loginRouter = require('./routes/login');
-const keysRouter = require('./routes/keys');
+const keysRouter = require('./routes/keys.js');
 
 // Use routes
 app.use('/game', gameRouter);
