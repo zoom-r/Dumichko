@@ -117,8 +117,8 @@
                 <div class="tab-pane fade px-4 pt-5" role="tabpanel" id="signup" aria-labelledby="signup-tab">
                     <form>
                         <div class="form-outline mb-4"><input class="form-control form-control" type="email" id="signupEmail" onchange="checkEmail(this)"><label class="form-label form-label" for="signupEmail">Имейл</label></div>
-                        <div class="form-outline mb-4"><input class="form-control form-control" type="password" id="signupPassword"><label class="form-label form-label" for="signupPassword">Парола</label></div>
-                        <div class="form-outline mb-4"><input class="form-control form-control" type="password" id="signupRepeatPassword"><label class="form-label form-label" for="signupRepeatPassword">Повтори парола</label></div>
+                        <div class="form-outline mb-4"><input class="form-control form-control" type="password" id="signupPassword" onchange="checkPassword(this)"><label class="form-label form-label" for="signupPassword">Парола</label><label class="form-label" for="signupPassword" id="signupInfoPassword"></label></div>
+                        <div class="form-outline mb-4"><input class="form-control form-control" type="password" id="signupRepeatPassword" onchange="checkPassword(this)" disabled><label class="form-label form-label" for="signupRepeatPassword">Повтори парола</label><label class="form-label" for="signupPassword" id="signupInfoRepeatPassword"></label></div>
                         <input type="button" class="btn btn-primary btn-block mb-3 home-buttons" onclick="SignUp()" value="Регистрация">
                     </form>
                 </div>
