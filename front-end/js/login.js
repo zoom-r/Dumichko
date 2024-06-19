@@ -79,8 +79,7 @@ async function SignUp(){
     }).then(function(response){
         if(response.data.result == true){
             alert('Успешна регистрация!');
-            user.loggedIn = true;
-            user.id = response.data.id;
+            updateUser({loggedIn: true, id: response.data.id});
             window.location.href = '/game';
         }else{
             alert('Неуспешна регистрация!');
@@ -116,9 +115,10 @@ async function LogIn(){
         if(response.data.result == true){
             alert('Успешно влизане!');
             //TODO: Redirect to the game page and create login info(save the user info somewhere on the client side)
-            user.loggedIn = true;
-            user.id = response.data.id;
-            window.location.href = '/game';
+            updateUser({loggedIn: true, id: response.data.id});
+            console.log(getUser());
+            //window.location.href = '/game';
+            
         }else{
             document.getElementById('loginInfoButton').innerHTML = 'Грешна парола!';
         }

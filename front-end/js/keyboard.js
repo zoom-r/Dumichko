@@ -41,8 +41,8 @@ function clickEnterKey(){
         checkLetters(row);
         row.dataset.state = "entered";
         //TODO: Save row in the database
-        if(user.loggedIn){
-            saveRow(row.id, row);
+        if(getUser().loggedIn){
+            saveRow(row.id, row.innerHTML.toString());
         }
     }else{
         toggleErrorLabel("Невалидна дума!");

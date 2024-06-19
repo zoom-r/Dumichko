@@ -29,7 +29,6 @@ async function checkUser(email, password){
         const sql = 'SELECT `password` FROM `users` WHERE `email` = ?';
         const values = [email];
         const [result, fields] = await connection.execute(sql, values);
-        console.log(result);
         try{
             const resultCompare = await bcrypt.compare(password, result[0].password);
             const [result2, fields2] = await connection.execute('SELECT `id` FROM `users` WHERE `email` = ?', [email]);
@@ -79,7 +78,7 @@ async function encryptPassword(password) {
 async function createTables(){
     const connection = await createConnection();
     const sql = 'INSERT INTO `distribution` (`first`, `second`, `third`, `fourth`, `fifth`, `sixth`) VALUES (0,0,0,0,0,0);';
-    const sql2 = 'INSERT INTO `current_progress` (`first`, `second`, `third`, `fourth`, `fifth`, `sixth`) VALUES (0,0,0,0,0,0);';
+    const sql2 = 'INSERT INTO `current_progress` (`first`, `second`, `third`, `fourth`, `fifth`, `sixth`) VALUES (null,null,null,null,null,null);';
     const sql3 = 'INSERT INTO `stats` (`id_guesses`) VALUE (?)'
     try {
         const [result, fields] = await connection.execute(sql);

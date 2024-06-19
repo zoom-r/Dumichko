@@ -1,7 +1,6 @@
-const { response } = require("express");
-
 let words;
 let wordOfTheDay;
+
 axios.get('http://localhost:3000/keys/words')
     .then(function(response){
         const secretKey = response.data;
@@ -55,10 +54,11 @@ function decryptData(encryptedData, secretKey) {
 
 //TODO: Implement saving the row to the database
 function saveRow(rowId, row){
+    console.log('Sending row to the server');
     axios.post('http://localhost:3000/game/save', {
         rowId: rowId,
         row: row,
-        id: user.id
+        id: getUser().id
     }).then(response => {
         console.log(response);
     });

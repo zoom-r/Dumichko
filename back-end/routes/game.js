@@ -87,8 +87,11 @@ function encryptData(data, secretKey) {
 }
 
 //TODO
-app.get('/save', (req, res) => {
-    saveRow(req.body.rowId, req.body.row, req.body.id);
+app.post('/save', (req, res) => {
+    console.log('Received row from the client : ', req.body);
+    saveRow(req.body.rowId, req.body.row, req.body.id).then(result => {
+        res.send(result);
+    });
 });
 
 module.exports = app;

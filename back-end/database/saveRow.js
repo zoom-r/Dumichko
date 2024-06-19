@@ -23,6 +23,9 @@ async function createConnection(){
 
 async function saveRow(rowId, row, id) {
     try{
+        const connection = await createConnection();
+        console.log('Created connection')
+
         let name;
         switch(rowId){
             case "row-1":
@@ -47,21 +50,23 @@ async function saveRow(rowId, row, id) {
                 name = "first";
                 break;
         }
-        const sql = 'UPDATE `current_progress` SET `?` = `?` WHERE `id` = ?';
-        const values = {
-            name: name,
-            row: row,
-            id: id
-        };
+
+        const getId = 'SELECT `id_progress` FROM `users` WHERE `id` = ?';
+        const valuesId = [id];
+        const [resultId, fieldsId] = await connection.execute(getId, valuesId);
+        console.log(resultId)
+
+        const sql = `UPDATE \`current_progress\` SET ${name} = ? WHERE \`id\` = ?`;
+        const values = [row, resultId[0].id_progress];
         
         const [result, fields] = await connection.execute(sql, values);
-        
-        console.log(result);
-        console.log(fields);
+        console.log(result, fields);
+        return true;
     }
     catch(err){
         console.error(err);
-        saveRow(rowId, row, id);
+        return false;
+        //saveRow(rowId, row, id);
     }
 }
 
