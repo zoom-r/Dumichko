@@ -22,7 +22,6 @@ async function createConnection(){
     }
 }
 
-
 async function checkUser(email, password){
     try{
         const connection = await createConnection();
@@ -30,22 +29,24 @@ async function checkUser(email, password){
         const sql = 'SELECT `password` FROM `users` WHERE `email` = ?';
         const values = [email];
         const [result, fields] = await connection.execute(sql, values);
-        // TODO: Check if the password is correct
+        console.log(result);
         try{
             const resultCompare = await bcrypt.compare(password, result[0].password);
-            return resultCompare;
+            const [result2, fields2] = await connection.execute('SELECT `id` FROM `users` WHERE `email` = ?', [email]);
+            if(resultCompare)
+                return {result: resultCompare, id:result2[0].id};
+            else
+                return {result: resultCompare};
         }catch(error){
             console.log(error);
-            return false;
+            return {result: false};
         }
     }
     catch(err){
         console.error(err);
-        return false;
+        return {result: false};
     }
 }
-
-
 
 async function checkEmail(email) {
     const connection = await createConnection();
@@ -101,10 +102,10 @@ async function saveUser(email, password){
     const values = [email, password, ids.id_stats, ids.id_progress];
     try {
         const [result, fields] = await connection.execute(sql, values);
-        return true;
+        return {result: true, id: result.insertId};
     } catch (err) {
         console.error(err);
-        return false; // It's better to throw the error or handle it appropriately
+        return {result: false}; // It's better to throw the error or handle it appropriately
     }
 }
 

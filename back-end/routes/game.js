@@ -6,6 +6,7 @@ const app = express.Router();
 const fs = require('fs');
 const Papa = require('papaparse');
 const crypto = require('crypto');
+const saveRow = require('../database/saveRow.js');
 
 
 
@@ -87,11 +88,7 @@ function encryptData(data, secretKey) {
 
 //TODO
 app.get('/save', (req, res) => {
-    const saveRow = require('../controllers/game');
-    const rowId = req.body.rowId;
-    const row = req.body.row;
-    const id = req.body.id;
-    saveRow(rowId, row, id);
+    saveRow(req.body.rowId, req.body.row, req.body.id);
 });
 
 module.exports = app;

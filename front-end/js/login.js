@@ -77,9 +77,11 @@ async function SignUp(){
         email: email,
         password: password
     }).then(function(response){
-        if(response.data == true){
+        if(response.data.result == true){
             alert('Успешна регистрация!');
-            window.location.href = '/login';
+            user.loggedIn = true;
+            user.id = response.data.id;
+            window.location.href = '/game';
         }else{
             alert('Неуспешна регистрация!');
         }
@@ -111,9 +113,12 @@ async function LogIn(){
         email: email,
         password: password
     }).then(function(response){
-        if(response.data == true){
+        if(response.data.result == true){
             alert('Успешно влизане!');
-            //window.location.href = '/game';
+            //TODO: Redirect to the game page and create login info(save the user info somewhere on the client side)
+            user.loggedIn = true;
+            user.id = response.data.id;
+            window.location.href = '/game';
         }else{
             document.getElementById('loginInfoButton').innerHTML = 'Грешна парола!';
         }

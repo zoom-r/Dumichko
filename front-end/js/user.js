@@ -1,1 +1,4 @@
-let loggedIn = false;
+let user = {
+    loggedIn: false,
+    id: null
+}
