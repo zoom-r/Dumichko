@@ -40,4 +40,10 @@ app.post('/signup', (req, res) => {
     });
 });
 
+app.post('/login', (req, res) => {
+    checkUser(req.body.email, req.body.password).then(result => {
+        res.send(result);
+    });
+});
+
 module.exports = app;

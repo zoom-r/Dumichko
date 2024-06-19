@@ -58,19 +58,18 @@ async function SignUp(){
     const email = document.getElementById('signupEmail').value;
     const password = document.getElementById('signupPassword').value;
     const repeatPassword = document.getElementById('signupRepeatPassword').value;
-    const label = document.getElementById('signupInfoButton').innerHTML;
     document.getElementById('signupInfoButton').style.color = 'red';
 
     if(email == '' || password == '' || repeatPassword == ''){
-        label = 'Моля попълнете всички полета!';
+        document.getElementById('signupInfoButton').innerHTML = 'Моля попълнете всички полета!';
         return;
     }
     if(document.getElementById('signupEmail').dataset.state == 'invalid' || document.getElementById('signupPassword').dataset.state == 'invalid' || document.getElementById('signupRepeatPassword').dataset.state == 'invalid'){
-        label = 'Моля попълнете всички полета правилно!';
+        document.getElementById('signupInfoButton').innerHTML = 'Моля попълнете всички полета правилно!';
         return;
     }
     if(document.getElementById('signupEmail').dataset.state == '' || document.getElementById('signupPassword').dataset.state == '' || document.getElementById('signupRepeatPassword').dataset.state == ''){
-        label = 'Моля попълнете всички полета!';
+        document.getElementById('signupInfoButton').innerHTML = 'Моля попълнете всички полета!';
         return;
     }
 
@@ -86,6 +85,40 @@ async function SignUp(){
         }
     }).catch(function(error){
         alert('Неуспешна регистрация!');
+        console.log(error);
+    });
+}
+
+async function LogIn(){
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    document.getElementById('loginInfoButton').style.color = 'red';
+
+    if(email == '' || password == ''){
+        document.getElementById('loginInfoButton').innerHTML = 'Моля попълнете всички полета!';
+        return;
+    }
+    if(document.getElementById('loginEmail').dataset.state == 'invalid'){
+        document.getElementById('loginInfoButton').innerHTML = 'Моля попълнете всички полета правилно!';
+        return;
+    }
+    if(document.getElementById('loginEmail').dataset.state == ''){
+        document.getElementById('loginInfoButton').innerHTML = 'Моля попълнете всички полета!';
+        return;
+    }
+
+    axios.post('/login/login', {
+        email: email,
+        password: password
+    }).then(function(response){
+        if(response.data == true){
+            alert('Успешно влизане!');
+            //window.location.href = '/game';
+        }else{
+            document.getElementById('loginInfoButton').innerHTML = 'Грешна парола!';
+        }
+    }).catch(function(error){
+        alert('Грешка!');
         console.log(error);
     });
 }

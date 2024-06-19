@@ -30,28 +30,18 @@ async function checkUser(email, password){
         const sql = 'SELECT `password` FROM `users` WHERE `email` = ?';
         const values = [email];
         const [result, fields] = await connection.execute(sql, values);
-        
         // TODO: Check if the password is correct
         try{
-            bcrypt.compare(password, result[0].password, function(err, res) {
-                if(err){
-                    console.log(err);
-                } else {
-                    return res;
-                }
-            });
+            const resultCompare = await bcrypt.compare(password, result[0].password);
+            return resultCompare;
+        }catch(error){
+            console.log(error);
+            return false;
         }
-        catch{
-            return 'Грешна парола!';
-        }
-        //
-
-        console.log(result);
-        console.log(fields);
     }
     catch(err){
         console.error(err);
-        return 'Акаунтът не съществува!';
+        return false;
     }
 }
 
