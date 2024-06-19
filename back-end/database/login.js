@@ -76,14 +76,13 @@ async function checkEmail(email) {
 }
 
 async function encryptPassword(password) {
-    await bcrypt.hash(password, 10, function(err, hash) {
-        if(err) {
-            console.log(err);
-        } else {
-            console.log(hash);
-            return hash;
-        }
-    });
+    try {
+        const hash = await bcrypt.hash(password, 10);
+        return hash;
+    } catch (err) {
+        console.log(err);
+        throw err; // Rethrow the error to be handled by the caller
+    }
 }
 
 async function createTables(){
@@ -96,7 +95,6 @@ async function createTables(){
         const [result2, fields2] = await connection.execute(sql2);
         const [result3, fields3] = await connection.execute(sql3, [result.insertId]); // Assuming you meant to pass the first row of the first result as a parameter
         // Assuming the first column of the first row contains the ID you're interested in
-        console.log(result.insertId, result2.insertId, result3.insertId);
         return {id_progress: result2.insertId, id_stats: result3.insertId};
     } catch (err) {
         console.error(err);
@@ -112,12 +110,8 @@ async function saveUser(email, password){
     const ids = await createTables();
     const values = [email, password, ids.id_stats, ids.id_progress];
     try {
-        console.log(values);
         const [result, fields] = await connection.execute(sql, values);
-        // console.log(result);
-        // console.log(fields);
         return true;
-        return 
     } catch (err) {
         console.error(err);
         return false; // It's better to throw the error or handle it appropriately

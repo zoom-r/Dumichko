@@ -24,20 +24,20 @@ app.post('/check-email', (req, res) => {
 });
 
 async function syncSaveUser(email, pass){
-    await encryptPassword(pass).then(encryptedPassword => {
-        console.log(encryptedPassword);
-        saveUser(email, encryptedPassword).then(result => {
-            return result;
-        }).catch(error => {
-            console.log(error);
-            return false
-        });
-    });
+    try{
+        const encryptedPassword = await encryptPassword(pass);
+        const result = await saveUser(email, encryptedPassword);
+        return result;
+    }catch(error){
+        console.log(error);
+        return false;
+    }
 }
 
 app.post('/signup', (req, res) => {
-    console.log(req.body.email, req.body.password);
-    res.send(syncSaveUser(req.body.email, req.body.password));
+    syncSaveUser(req.body.email, req.body.password).then(result => {
+        res.send(result);
+    });
 });
 
 module.exports = app;
