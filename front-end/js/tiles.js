@@ -20,6 +20,8 @@ function checkLetters(row){
         //     saveRow(row.id, row);
         // }
         toggleErrorLabel("Поздравления! Познахте думата!");
+        if(getUser().loggedIn)
+            updateUser({loggedIn: true, id: getUser().id, won:true});
         disableKeyboard('keyboard-module');
     }else{
         checkEnteredLetters(letters);

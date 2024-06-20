@@ -1,4 +1,5 @@
 {
     "loggedIn": false,
-    "id": null
+    "id": null,
+    "won": false
 }

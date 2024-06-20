@@ -21,7 +21,7 @@ async function createConnection(){
     }
 }
 
-async function saveRow(rowId, row, id) {
+async function saveRow(rowId, row, id, won) {
     try{
         const connection = await createConnection();
         console.log('Created connection')
@@ -60,7 +60,13 @@ async function saveRow(rowId, row, id) {
         const values = [row, resultId[0].id_progress];
         
         const [result, fields] = await connection.execute(sql, values);
-        console.log(result, fields);
+
+        if(won){
+            const sql2 = 'UPDATE `current_progress` SET `won` = 1 WHERE `id` = ?';
+            const values2 = [resultId[0].id_progress];
+            const [result2, fields2] = await connection.execute(sql2, values2);
+        }
+
         return true;
     }
     catch(err){
@@ -80,8 +86,22 @@ async function readRows(id){
         const sql = 'SELECT `first`, `second`, `third`, `fourth`, `fifth`, `sixth` FROM `current_progress` WHERE `id` = ?';
         const values = [resultId[0].id_progress];
         const [result, fields] = await connection.execute(sql, values);
-        console.log(result)
-        return result;
+
+        const sql2 = 'SELECT `won` FROM `current_progress` WHERE `id` = ?';
+        const values2 = [resultId[0].id_progress];
+        const [result2, fields2] = await connection.execute(sql2, values2);
+        switch(result2[0].won){
+            case 0:
+                var won = false;
+                break;
+            case 1:
+                var won = true;
+                break;
+            default:
+                var won = false;
+                break;
+        }
+        return {result, won};
     }
     catch(err){
         console.error(err);
@@ -89,5 +109,23 @@ async function readRows(id){
     }
 }
 
-module.exports = {saveRow, readRows};
+async function eraseProgress(){
+    try{
+        const connection = await createConnection();
+        const getIds = 'SELECT `id_progress` FROM `users`';
+        const [resultIds, fieldsIds] = await connection.execute(getIds);
+        resultIds.forEach(async (resultId) => {
+            const sql = 'UPDATE `current_progress` SET `first` = null, `second` = null, `third` = null, `fourth` = null, `fifth` = null, `sixth` = null WHERE `id` = ?';
+            const values = [resultId.id_progress];
+            const [result, fields] = await connection.execute(sql, values);
+        });
+        return true;
+    }
+    catch(err){ 
+        console.error(err);
+        return false;
+    }
+}
+
+module.exports = {saveRow, readRows, eraseProgress};
 

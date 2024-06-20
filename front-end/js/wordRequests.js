@@ -63,14 +63,15 @@ function loadRows(){
     .then(function(response){
         const rows = response.data.rows;
         for(let i = 0; i < rows.length; i++){
-            // switch(rows[i].rowId){
-            //     case 'first':
-            // }
             if(rows[i].row == null)
                 continue;
             const row = document.getElementById(rows[i].rowId);
-            console.log(rows);
+            row.dataset.state = 'entered';
             row.innerHTML = rows[i].row;
+        }
+        if(response.data.won){
+            updateUser({loggedIn: true, id: getUser().id, won: true});
+            disableKeyboard('keyboard-module');
         }
     })
     .catch(function(error){
@@ -84,7 +85,8 @@ function saveRow(rowId, row){
     axios.post('http://localhost:3000/game/save', {
         rowId: rowId,
         row: row,
-        id: getUser().id
+        id: getUser().id,
+        won: getUser().won
     }).then(response => {
         console.log(response);
     });

@@ -6,7 +6,7 @@ const app = express.Router();
 const fs = require('fs');
 const Papa = require('papaparse');
 const crypto = require('crypto');
-const {saveRow, readRows} = require('../database/saveRow.js');
+const {saveRow, readRows, eraseProgress} = require('../database/saveRow.js');
 
 
 
@@ -66,6 +66,9 @@ loadWords().then(availableWords => {
         dailyWord = getDailyWord();
         console.log('Word of the day:', dailyWord);
     }, 24 * 60 * 60 * 1000); // Run every 24 hours
+
+    eraseProgress();
+
     // Use getDailyWord() to handle requests that need the daily word
     app.get('/word', (req, res) => {
         const word = getDailyWord();
@@ -88,7 +91,7 @@ function encryptData(data, secretKey) {
 
 app.post('/save', (req, res) => {
     console.log('Received row from the client : ', req.body);
-    saveRow(req.body.rowId, req.body.row, req.body.id).then(result => {
+    saveRow(req.body.rowId, req.body.row, req.body.id, req.body.won).then(result => {
         res.send(result);
     });
 });
@@ -97,10 +100,8 @@ app.get('/load/:id', (req, res) => {
     const id = req.params.id;
     const rows = [];
     readRows(id).then(result => {
-        if(result){
-
-            const data = result;
-            console.log(data);
+        if(result.result){
+            const data = result.result;
             for(let i = 0; i < 6; i++){
                 let rowId;
                 switch(i){
@@ -152,9 +153,9 @@ app.get('/load/:id', (req, res) => {
                 }
                 rows.push({ rowId, row: data[0][rowId2] });
             }
-            res.send({ rows: rows });
+            res.send({ rows: rows , won: result.won});
         }else{
-            res.send({ rows: [] });
+            res.send({ rows: [] , won: false});
         }
     });
 });
