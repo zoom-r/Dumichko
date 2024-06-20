@@ -8,9 +8,6 @@ const Papa = require('papaparse');
 const crypto = require('crypto');
 const {saveRow, readRows, eraseProgress} = require('../database/saveRow.js');
 
-
-
-
 app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../../front-end/pages/game.html'));
 });
@@ -90,7 +87,6 @@ function encryptData(data, secretKey) {
 }
 
 app.post('/save', (req, res) => {
-    console.log('Received row from the client : ', req.body);
     saveRow(req.body.rowId, req.body.row, req.body.id, req.body.won).then(result => {
         res.send(result);
     });

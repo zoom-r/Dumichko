@@ -53,7 +53,6 @@ async function checkEmail(email) {
     const values = [email];
     try {
         const [result, fields] = await connection.execute(sql, values);
-        console.log(result);
         if (result.length > 0) {
             return true; // Email exists
         } else {

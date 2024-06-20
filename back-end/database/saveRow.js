@@ -24,7 +24,6 @@ async function createConnection(){
 async function saveRow(rowId, row, id, won) {
     try{
         const connection = await createConnection();
-        console.log('Created connection')
 
         let name;
         switch(rowId){
@@ -54,7 +53,6 @@ async function saveRow(rowId, row, id, won) {
         const getId = 'SELECT `id_progress` FROM `users` WHERE `id` = ?';
         const valuesId = [id];
         const [resultId, fieldsId] = await connection.execute(getId, valuesId);
-        console.log(resultId)
 
         const sql = `UPDATE \`current_progress\` SET ${name} = ? WHERE \`id\` = ?`;
         const values = [row, resultId[0].id_progress];

@@ -76,7 +76,6 @@ function loadRows(){
             row.dataset.state = 'entered';
             row.innerHTML = rows[i].row;
         }
-        console.log('loadRows ', response.data.won);
         if(response.data.won == true){
             updateUser({loggedIn: true, id: getUser().id, won: true});
             disableKeyboard('keyboard-module');
@@ -97,7 +96,5 @@ function saveRow(rowId, row){
         row: row,
         id: getUser().id,
         won: getUser().won 
-    }).then(response => {
-        console.log(response);
     });
 }
