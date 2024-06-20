@@ -70,5 +70,24 @@ async function saveRow(rowId, row, id) {
     }
 }
 
-module.exports = saveRow;
+async function readRows(id){
+    try{
+        const connection = await createConnection();
+        const getId = 'SELECT `id_progress` FROM `users` WHERE `id` = ?';
+        const valuesId = [id];
+        const [resultId, fieldsId] = await connection.execute(getId, valuesId);
+
+        const sql = 'SELECT `first`, `second`, `third`, `fourth`, `fifth`, `sixth` FROM `current_progress` WHERE `id` = ?';
+        const values = [resultId[0].id_progress];
+        const [result, fields] = await connection.execute(sql, values);
+        console.log(result)
+        return result;
+    }
+    catch(err){
+        console.error(err);
+        return null;
+    }
+}
+
+module.exports = {saveRow, readRows};
 

@@ -114,10 +114,9 @@ async function LogIn(){
     }).then(function(response){
         if(response.data.result == true){
             alert('Успешно влизане!');
-            //TODO: Redirect to the game page and create login info(save the user info somewhere on the client side)
             updateUser({loggedIn: true, id: response.data.id});
             console.log(getUser());
-            //window.location.href = '/game';
+            window.location.href = '/game';
             
         }else{
             document.getElementById('loginInfoButton').innerHTML = 'Грешна парола!';

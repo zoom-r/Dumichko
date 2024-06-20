@@ -32,7 +32,7 @@ function disableKeyboard(id) {
     //div.style.opacity = '0.4';
 }
   
-
+//TODO: Fix the function
 function checkEnteredLetters(letters){
     for(let i = 0; i < 5; i++){
         if(letters.item(i).innerHTML.toUpperCase() != wordOfTheDay[i]){

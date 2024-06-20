@@ -9,6 +9,7 @@ function printLetter(element){
         }
         tile = tiles.item(i);
     }
+    console.log(tile)
     tile.innerHTML = element.getAttribute('data-key');
 }
 
@@ -40,7 +41,6 @@ function clickEnterKey(){
     if(words.includes(word)){
         checkLetters(row);
         row.dataset.state = "entered";
-        //TODO: Save row in the database
         if(getUser().loggedIn){
             saveRow(row.id, row.innerHTML.toString());
         }

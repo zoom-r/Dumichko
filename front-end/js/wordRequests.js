@@ -1,6 +1,12 @@
 let words;
 let wordOfTheDay;
 
+window.onload = function(){
+    if(getUser().loggedIn == true){
+        loadRows();
+    }
+}
+
 axios.get('http://localhost:3000/keys/words')
     .then(function(response){
         const secretKey = response.data;
@@ -52,7 +58,27 @@ function decryptData(encryptedData, secretKey) {
     }
 }
 
-//TODO: Implement saving the row to the database
+function loadRows(){
+    axios.get('http://localhost:3000/game/load/' + getUser().id)
+    .then(function(response){
+        const rows = response.data.rows;
+        for(let i = 0; i < rows.length; i++){
+            // switch(rows[i].rowId){
+            //     case 'first':
+            // }
+            if(rows[i].row == null)
+                continue;
+            const row = document.getElementById(rows[i].rowId);
+            console.log(rows);
+            row.innerHTML = rows[i].row;
+        }
+    })
+    .catch(function(error){
+        console.log(error);
+    });
+
+}
+
 function saveRow(rowId, row){
     console.log('Sending row to the server');
     axios.post('http://localhost:3000/game/save', {
