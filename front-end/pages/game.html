@@ -105,11 +105,16 @@
     <div>
         <div class="wordle-container">
             <header id="header" data-role="Header" class="wordle-header">
-                <h1 id="title" class="wordle-text" style="font-family: 'Yearbook Solid cyr';">Думичко</h1>
-                <div id="header_icons" class="wordle-icon-group"><svg viewBox="0 0 1024 1024" class="wordle-icon">
-              <path d="M512 256q70 0 120 50t50 120q0 54-64 111t-64 103h-84q0-46 20-79t44-48 44-37 20-50q0-34-26-59t-60-25-60 25-26 59h-84q0-70 50-120t120-50zM512 854q140 0 241-101t101-241-101-241-241-101-241 101-101 241 101 241 241 101zM512 86q176 0 301 125t125 301-125 301-301 125-301-125-125-301 125-301 301-125zM470 768v-86h84v86h-84z"></path></svg><svg viewBox="0 0 1024 1024" class="wordle-icon2">
-              <path d="M288 384h-192c-17.6 0-32 14.4-32 32v576c0 17.6 14.4 32 32 32h192c17.6 0 32-14.4 32-32v-576c0-17.6-14.4-32-32-32zM288 960h-192v-256h192v256zM608 256h-192c-17.6 0-32 14.4-32 32v704c0 17.6 14.4 32 32 32h192c17.6 0 32-14.4 32-32v-704c0-17.6-14.4-32-32-32zM608 960h-192v-320h192v320zM928 128h-192c-17.6 0-32 14.4-32 32v832c0 17.6 14.4 32 32 32h192c17.6 0 32-14.4 32-32v-832c0-17.6-14.4-32-32-32zM928 960h-192v-384h192v384z"></path>
-            </svg></div>
+                <h1 id="title" class="wordle-text" style="font-family: 'Yearbook Solid cyr';" onclick="window.location.href='/'">Думичко</h1>
+                <div id="header_icons" class="wordle-icon-group">
+                    <svg viewBox="0 0 1024 1024" class="wordle-icon">
+                        <path d="M512 256q70 0 120 50t50 120q0 54-64 111t-64 103h-84q0-46 20-79t44-48 44-37 20-50q0-34-26-59t-60-25-60 25-26 59h-84q0-70 50-120t120-50zM512 854q140 0 241-101t101-241-101-241-241-101-241 101-101 241 101 241 241 101zM512 86q176 0 301 125t125 301-125 301-301 125-301-125-125-301 125-301 301-125zM470 768v-86h84v86h-84z"></path>
+                    </svg>
+                    <svg viewBox="0 0 1024 1024" class="wordle-icon2">
+                        <path d="M288 384h-192c-17.6 0-32 14.4-32 32v576c0 17.6 14.4 32 32 32h192c17.6 0 32-14.4 32-32v-576c0-17.6-14.4-32-32-32zM288 960h-192v-256h192v256zM608 256h-192c-17.6 0-32 14.4-32 32v704c0 17.6 14.4 32 32 32h192c17.6 0 32-14.4 32-32v-704c0-17.6-14.4-32-32-32zM608 960h-192v-320h192v320zM928 128h-192c-17.6 0-32 14.4-32 32v832c0 17.6 14.4 32 32 32h192c17.6 0 32-14.4 32-32v-832c0-17.6-14.4-32-32-32zM928 960h-192v-384h192v384z"></path>
+                    </svg>
+                    <i class="fa-solid fa-right-from-bracket wordle-icon3" id="logoutButton" onclick="LogOut()"></i>
+                </div>
             </header>                
             <div id="error_label" class="alert alert-warning warning-message" role="alert" data-state=""></div>
             <div id="word-app-game" class="App-module_game__yruqo">
@@ -263,6 +268,7 @@
             </div>
         </div>
     </div>
+    <script src="https://kit.fontawesome.com/7bc51836ed.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

@@ -21,10 +21,10 @@ function checkLetters(row){
         // }
         toggleErrorLabel("Поздравления! Познахте думата!");
         if(getUser().loggedIn)
-            updateUser({loggedIn: true, id: getUser().id, won:true});
+            updateUser({loggedIn: true, id: getUser().id, won:true}); 
         disableKeyboard('keyboard-module');
     }else{
-        checkEnteredLetters(letters);
+        checkEnteredLetters(letters); 
     }
 }
 

@@ -115,7 +115,7 @@ async function eraseProgress(){
         const getIds = 'SELECT `id_progress` FROM `users`';
         const [resultIds, fieldsIds] = await connection.execute(getIds);
         resultIds.forEach(async (resultId) => {
-            const sql = 'UPDATE `current_progress` SET `first` = null, `second` = null, `third` = null, `fourth` = null, `fifth` = null, `sixth` = null WHERE `id` = ?';
+            const sql = 'UPDATE `current_progress` SET `first` = null, `second` = null, `third` = null, `fourth` = null, `fifth` = null, `sixth` = null, `won` = 0 WHERE `id` = ?';
             const values = [resultId.id_progress];
             const [result, fields] = await connection.execute(sql, values);
         });
@@ -126,6 +126,6 @@ async function eraseProgress(){
         return false;
     }
 }
-
+ 
 module.exports = {saveRow, readRows, eraseProgress};
 

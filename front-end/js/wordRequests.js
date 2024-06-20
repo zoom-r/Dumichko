@@ -4,7 +4,14 @@ let wordOfTheDay;
 window.onload = function(){
     if(getUser().loggedIn == true){
         loadRows();
+    }else{
+        document.getElementById('logoutButton').style.display = 'none';
     }
+} 
+
+function LogOut(){
+    updateUser({loggedIn: false, id: null, won: false});
+    window.location.href = '/';
 }
 
 axios.get('http://localhost:3000/keys/words')
@@ -69,9 +76,12 @@ function loadRows(){
             row.dataset.state = 'entered';
             row.innerHTML = rows[i].row;
         }
-        if(response.data.won){
+        console.log('loadRows ', response.data.won);
+        if(response.data.won == true){
             updateUser({loggedIn: true, id: getUser().id, won: true});
             disableKeyboard('keyboard-module');
+        }else{
+            updateUser({loggedIn: true, id: getUser().id, won: false});
         }
     })
     .catch(function(error){
@@ -86,7 +96,7 @@ function saveRow(rowId, row){
         rowId: rowId,
         row: row,
         id: getUser().id,
-        won: getUser().won
+        won: getUser().won 
     }).then(response => {
         console.log(response);
     });

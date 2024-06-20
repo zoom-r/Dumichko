@@ -100,12 +100,27 @@ padding-bottom: var(--dl-space-space-twounits); */
   fill: #d9d9d9;
   width: 47px;
   height: 42px;
+  cursor: pointer;
 }
 
 .wordle-icon2 {
   fill: #d9d9d9;
   width: 43px;
   height: 37px;
+  cursor: pointer;
+}
+
+#title:hover{
+  cursor: pointer;
+}
+
+.wordle-icon3 {
+  fill: #d9d9d9;
+  margin-top:2px;
+  margin-left:4px;
+  width: 37px;
+  height: 37px;
+  cursor: pointer;
 }
 
 .wordle-container05 {

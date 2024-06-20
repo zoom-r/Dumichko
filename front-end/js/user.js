@@ -1,6 +1,6 @@
 
 // Step 2: Fetch Data on Page Load
-window.onload = function() {
+window.onload = function() { 
     fetch('../js/user.json')
         .then(response => {
             if (!response.ok) {
@@ -9,7 +9,6 @@ window.onload = function() {
             return response.json();
         })
         .then(data => {
-            console.log(getUser())
             // Step 3: Store Data in Local Storage
             if(getUser().loggedIn == false || getUser() == null){
                 localStorage.setItem('user', JSON.stringify(data));
@@ -27,9 +26,6 @@ function getUser() {
     return null; // or a default value
 }
 
-// Usage
-// const myData = getData();
-// console.log(myData);
 
 // Function to update user data in local storage
 function updateUser(updatedProperties) {
